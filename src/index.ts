@@ -141,7 +141,8 @@ async function handleModuleEvent(event: MatrixEvent) {
             if (module.event_types.includes(event.type)) {
                 console.log(event)
                 const forwardResult: any = await forwardEvent(module, event);
-                if (forwardResult.response) {
+                console.log("forward result: ", forwardResult)
+                if (forwardResult && forwardResult.response) {
                     if (forwardResult.response.message) {
                         sendMessage(event.room_id, forwardResult.response.message, {
                             moduleEvent: true,
