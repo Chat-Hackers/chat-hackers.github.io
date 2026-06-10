@@ -143,6 +143,13 @@ async function handleModuleEvent(event: MatrixEvent) {
                 const forwardResult: any = await forwardEvent(module, event);
                 console.log("forward result: ", forwardResult)
                 if (forwardResult && forwardResult.response) {
+                    if (typeof (forwardResult.response) === "string") {
+                        sendMessage(event.room_id, forwardResult.response, {
+                            moduleEvent: true,
+                            wrapperEvent: false
+                        })
+                    }
+
                     if (forwardResult.response.message) {
                         sendMessage(event.room_id, forwardResult.response.message, {
                             moduleEvent: true,
@@ -150,7 +157,8 @@ async function handleModuleEvent(event: MatrixEvent) {
                             ...forwardResult.response.context
                         });
                     }
-                    else {
+
+                    if (forwardResult.reponse[0]) {
                         forwardResult.response.forEach(response => {
                             sendMessage(event.room_id, response.message, {
                                 moduleEvent: true,
