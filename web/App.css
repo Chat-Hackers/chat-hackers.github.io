@@ -54,15 +54,33 @@ a {
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: space-between;
 }
 
 #tools-container {
-  width: 50%;
+  /* width: 50%; */
   padding: 5px;
 }
 
 #chat-container {
   /* width: 50%;*/
+  height: 100%;
+  overflow-y: auto;
+}
+
+#stats-container {
+  padding: 5px;
+}
+
+#chat-title {
+  margin-left: 5px;
+}
+
+.divider {
+  display: block;
+  width: 98%;
+  padding: 1%;
+  border-top: solid black 1px;
 }
 
 @media screen and (max-width: 700px) {
@@ -81,9 +99,20 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border: 1px black solid;
   margin: 5px;
   padding: 5px;
+  max-width: 300px;
+}
+
+.tool-title-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tool-title {
+  margin-right: 10px;
 }
 
 .sender {
@@ -281,4 +310,52 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+/* TOGGLE STYLE */
+
+.toggle-track {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.toggle-track input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-thumb {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 24px;
+  transition: background 0.2s ease;
+}
+
+.toggle-thumb::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+input:checked + .toggle-thumb {
+  background: #1d9e75;
+}
+
+input:checked + .toggle-thumb::before {
+  transform: translateX(20px);
+}
+
+input:focus-visible + .toggle-thumb {
+  box-shadow: 0 0 0 2px #5dcaa5;
 }
